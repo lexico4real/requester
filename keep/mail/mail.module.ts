@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 // import { Module } from '@nestjs/common';
 // import { MailController } from './mail.controller';
 // import { MailService } from './mail.service';

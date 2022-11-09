@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import * as speakeasy from 'speakeasy';
 
 export default class SecretGenerator {

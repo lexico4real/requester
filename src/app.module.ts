@@ -8,6 +8,9 @@ import { HealthModule } from './health/health.module';
 import { BarcodeModule } from './barcode/barcode.module';
 import { typeOrmConfig } from '../config/orm/global';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PasswordResetModule } from './password-reset/password-reset.module';
+import { DepartmentsModule } from './departments/departments.module';
+import { DesignationsModule } from './designations/designations.module';
 
 @Module({
   imports: [
@@ -17,6 +20,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     AuthModule,
     HealthModule,
     BarcodeModule,
+    PasswordResetModule,
+    DepartmentsModule,
+    DesignationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

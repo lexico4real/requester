@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export default class RandomCode {
   generate(length: number): string {
     let result = '';

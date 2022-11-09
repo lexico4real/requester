@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 // import { Injectable } from '@nestjs/common';
 // // import Credentials from './Credentials';
 // import Mailer from './mailer';

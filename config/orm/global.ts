@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { ConnectionOptions } from 'typeorm';
 import * as config from 'config';
 

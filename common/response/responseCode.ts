@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export enum ResponseCode {
   SUCCESS = 200,
   CREATED = 201,

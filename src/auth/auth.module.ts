@@ -8,6 +8,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as config from 'config';
+import Mailer from 'config/mail/mailer';
+import { PasswordResetModule } from '../password-reset/password-reset.module';
 
 const jwtConfig = config.get('jwt');
 
@@ -29,8 +31,9 @@ const jwtConfig = config.get('jwt');
       }),
     }),
     TypeOrmModule.forFeature([UsersRepository]),
+    PasswordResetModule,
   ],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, Mailer],
   controllers: [AuthController],
   exports: [JwtStrategy, PassportModule],
 })

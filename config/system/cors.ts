@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import * as config from 'config';
 import Logger from 'config/log4js/logger';
 
