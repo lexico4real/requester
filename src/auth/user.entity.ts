@@ -19,10 +19,9 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   email: string;
 
-  // Todo: Designation
   @ManyToOne(() => Designation, (designation) => designation.userIds)
   designationId: string;
-  // Todo: Department
+
   @ManyToOne(() => Department, (department) => department.userIds)
   departmentId: string;
 
