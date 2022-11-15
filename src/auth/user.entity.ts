@@ -28,6 +28,18 @@ export class User extends BaseEntity {
   @Column({ default: false })
   isVerified: boolean;
 
+  @Column({ enum: ['MALE', 'FEMALE'] })
+  gender: string;
+
+  @Column({ nullable: true })
+  managerId: string;
+
+  @Column({ nullable: true })
+  signature: string;
+
+  @Column({ nullable: true })
+  userTypeId: string;
+
   @Column()
   password: string;
 }

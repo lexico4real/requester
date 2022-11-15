@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
+import Logger from 'config/log4js/logger';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateDesignationDto } from './dto/create-designation.dto';
 import { UpdateDesignationDto } from './dto/update-designation.dto';
@@ -26,6 +27,12 @@ export class DesignationsRepository extends Repository<Designation> {
           HttpStatus.CONFLICT,
         );
       } else {
+        new Logger().log(
+          'error',
+          'error',
+          error.message,
+          'DesignationsRepository',
+        );
         throw new HttpException(
           {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -45,9 +52,45 @@ export class DesignationsRepository extends Repository<Designation> {
   }
 
   async getDesignationById(id: string): Promise<Designation> {
-    const query = this.createQueryBuilder('designation');
-    query.where('designation.id = :id', { id });
-    const designation = await query.getOne();
+    if (id.length !== 36) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: `invalid id: ${id}`,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    let designation: any;
+    try {
+      const query = this.createQueryBuilder('designation');
+      query.where('designation.id = :id', { id });
+      designation = await query.getOne();
+      if (!designation) {
+        throw new HttpException(
+          {
+            status: HttpStatus.NOT_FOUND,
+            error: `designation not found`,
+          },
+          HttpStatus.NOT_FOUND,
+        );
+      }
+    } catch (error) {
+      new Logger().log(
+        'error',
+        'error',
+        error.message,
+        'DesignationsRepository',
+      );
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'something went wrong',
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
     return designation;
   }
 
@@ -60,17 +103,27 @@ export class DesignationsRepository extends Repository<Designation> {
     try {
       designation.name = name || designation.name;
       designation.description = description || designation.description;
+      designation.updatedAt = new Date();
       await this.update(id, {
         name: designation.name,
         description: designation.description,
+        updatedAt: designation.updatedAt,
       });
     } catch (error) {
-      return error;
+      new Logger().log(
+        'error',
+        'error',
+        error.message,
+        'DesignationsRepository',
+      );
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'something went wrong',
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
     return designation;
-  }
-
-  async deleteDesignation(id: string): Promise<void> {
-    await this.delete(id);
   }
 }

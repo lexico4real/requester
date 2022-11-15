@@ -6,6 +6,7 @@ import { TransformInterceptor } from '../config/interceptor/transform.intercepto
 import ClusterConfig from 'config/system/cluster';
 import CorsConfig from 'config/system/cors';
 import SwaggerConfig from 'config/swagger/config';
+import * as compression from 'compression';
 
 async function bootstrap() {
   const cluster = new ClusterConfig();
@@ -17,6 +18,7 @@ async function bootstrap() {
   await cors.set(app);
   app.setGlobalPrefix('/api/v1');
   await doc.set(app);
+  app.use(compression());
   app.useGlobalInterceptors(new TransformInterceptor());
   app.enableShutdownHooks();
   await cluster.set(app);

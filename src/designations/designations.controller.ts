@@ -5,7 +5,6 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -41,10 +40,5 @@ export class DesignationsController {
     @Body() updateDesignationDto: UpdateDesignationDto,
   ) {
     return await this.designationsService.update(id, updateDesignationDto);
-  }
-
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return await this.designationsService.deleteDesignation(id);
   }
 }

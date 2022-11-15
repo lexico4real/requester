@@ -31,8 +31,4 @@ export class DesignationsService {
       updateDesignationDto,
     );
   }
-
-  async deleteDesignation(id: string) {
-    return await this.designationsRepository.deleteDesignation(id);
-  }
 }

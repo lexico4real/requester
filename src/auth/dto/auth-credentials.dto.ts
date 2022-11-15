@@ -1,5 +1,8 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
+  IsEmail,
+  IsEnum,
   IsOptional,
   IsString,
   IsUUID,
@@ -7,11 +10,10 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { Gender } from 'common/gender';
 
 export class AuthCredentialsDto {
-  @Matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, {
-    message: 'Email is invalid',
-  })
+  @IsEmail()
   email: string;
 
   @IsString()
@@ -35,8 +37,14 @@ export class AuthCredentialsDto {
   })
   password: string;
 
+  @IsEnum((_type: any) => 'MALE' || 'FEMALE')
+  gender: Gender;
+
   @IsUUID()
   designationId: string;
+
+  @IsOptional()
+  userTypeId: string;
 
   @IsUUID()
   departmentId: string;

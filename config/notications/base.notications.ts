@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import notifier from 'node-notifier';
 import path from 'path';
 

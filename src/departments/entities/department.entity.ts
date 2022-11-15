@@ -15,4 +15,7 @@ export class Department extends BaseEntity {
 
   @OneToMany(() => User, (user) => user.deletedAt)
   userIds: User[];
+
+  @Column({ nullable: true })
+  managerId: string;
 }

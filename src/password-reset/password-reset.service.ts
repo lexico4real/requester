@@ -131,7 +131,7 @@ export class PasswordResetService {
     });
     return {
       status: 'success',
-      code: HttpStatus.CREATED,
+      code: HttpStatus.OK,
       message: 'password reset successful',
       time: new Date(),
     };

@@ -11,6 +11,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { DesignationsModule } from './designations/designations.module';
+import { UserTypesModule } from './user-types/user-types.module';
+import { RequestTypesModule } from './request-types/request-types.module';
+import { RequestSignatoriesModule } from './request-signatories/request-signatories.module';
+import { RequestTemplatesModule } from './request-templates/request-templates.module';
+import { RequestsModule } from './requests/requests.module';
 
 @Module({
   imports: [
@@ -23,6 +28,11 @@ import { DesignationsModule } from './designations/designations.module';
     PasswordResetModule,
     DepartmentsModule,
     DesignationsModule,
+    UserTypesModule,
+    RequestTypesModule,
+    RequestSignatoriesModule,
+    RequestTemplatesModule,
+    RequestsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

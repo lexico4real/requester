@@ -79,10 +79,15 @@ export class AuthService {
 
   async getAllUsers(): Promise<any> {
     const result = await this.usersRepository.find();
+    // remove password from result
+    result.forEach((user) => {
+      delete user.password;
+    });
+
     return {
       status: 'success',
       code: HttpStatus.OK,
-      message: 'password reset successful',
+      message: 'users retrieved',
       data: result,
       time: new Date(),
     };
